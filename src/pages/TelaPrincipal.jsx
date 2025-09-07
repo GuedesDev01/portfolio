@@ -1,24 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import logoTB from '../assets/TB CONSTRUÇÕES (1).jpg';
 
 export default function TelaPrincipal() {
- useEffect(() => {
-  AOS.init({ duration: 1000 });
-  const onScroll = () => AOS.refresh();
-  window.addEventListener('scroll', onScroll);
-  return () => window.removeEventListener('scroll', onScroll);
-}, []);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+    const onScroll = () => AOS.refresh();
+    window.addEventListener('scroll', onScroll);
+
+    // Responsividade
+    const handleResize = () => setIsMobile(window.innerWidth < 700);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Estilo dos cards com efeito de hover
   const cardStyle = {
     flex: 1,
-    minWidth: 250,
+    minWidth: isMobile ? '100%' : 250,
     background: '#fffbe6',
     borderRadius: 12,
-    padding: 20,
+    padding: isMobile ? 12 : 20,
     boxShadow: '0 2px 8px #cb9a2822',
     transition: 'transform 0.25s, box-shadow 0.25s',
     cursor: 'pointer',
@@ -43,11 +53,11 @@ export default function TelaPrincipal() {
         style={{
           background: 'linear-gradient(90deg, #cb9a28 60%, #ffe082 100%)',
           color: '#fff',
-          padding: '2.5rem 0 2rem 0',
+          padding: isMobile ? '1.5rem 0 1rem 0' : '2.5rem 0 2rem 0',
           textAlign: 'center',
           boxShadow: '0 4px 24px #cb9a2822',
-          borderBottomLeftRadius: 40,
-          borderBottomRightRadius: 40,
+          borderBottomLeftRadius: isMobile ? 20 : 40,
+          borderBottomRightRadius: isMobile ? 20 : 40,
         }}
         data-aos="fade-down"
       >
@@ -55,12 +65,12 @@ export default function TelaPrincipal() {
           src={logoTB}
           alt="Logo TB Construções"
           style={{
-            width: 160,
-            height: 160,
+            width: isMobile ? 100 : 160,
+            height: isMobile ? 100 : 160,
             objectFit: 'cover',
-            marginBottom: 18,
+            marginBottom: isMobile ? 10 : 18,
             borderRadius: '50%',
-            border: '6px solid #fffbe6',
+            border: '4px solid #fffbe6',
             boxShadow: '0 4px 24px #cb9a2822',
             background: '#fffbe6'
           }}
@@ -68,7 +78,7 @@ export default function TelaPrincipal() {
         />
         <h1
           style={{
-            fontSize: '2.5rem',
+            fontSize: isMobile ? '1.5rem' : '2.5rem',
             fontWeight: 800,
             letterSpacing: 2,
             margin: 0,
@@ -78,7 +88,7 @@ export default function TelaPrincipal() {
         >
           TB CONSTRUÇÕES
         </h1>
-        <p style={{ fontSize: '1.2rem', margin: '0.5rem 0 0 0', color: '#fffbe6', fontWeight: 500 }}>
+        <p style={{ fontSize: isMobile ? '1rem' : '1.2rem', margin: '0.5rem 0 0 0', color: '#fffbe6', fontWeight: 500 }}>
           Construindo sonhos, realizando projetos.
         </p>
       </header>
@@ -88,10 +98,10 @@ export default function TelaPrincipal() {
         data-aos="fade-up"
         style={{
           maxWidth: 900,
-          margin: '2.5rem auto 0 auto',
+          margin: isMobile ? '1.2rem auto 0 auto' : '2.5rem auto 0 auto',
           background: '#fff',
-          borderRadius: 18,
-          padding: '2.5rem 2rem',
+          borderRadius: isMobile ? 10 : 18,
+          padding: isMobile ? '1.2rem 0.7rem' : '2.5rem 2rem',
           boxShadow: '0 4px 24px #cb9a2822',
           color: '#3d3d3d',
           display: 'flex',
@@ -99,11 +109,11 @@ export default function TelaPrincipal() {
           alignItems: 'center',
         }}
       >
-        <span style={{ fontSize: 40, marginBottom: 8 }}>🏗️</span>
+        <span style={{ fontSize: isMobile ? 28 : 40, marginBottom: 8 }}>🏗️</span>
         <h2
           style={{
             marginTop: 0,
-            fontSize: '2rem',
+            fontSize: isMobile ? '1.2rem' : '2rem',
             fontWeight: 700,
             letterSpacing: 1,
             color: '#cb9a28',
@@ -125,8 +135,8 @@ export default function TelaPrincipal() {
           style={{
             maxWidth: 700,
             textAlign: 'justify',
-            fontSize: '1.15rem',
-            lineHeight: 1.8,
+            fontSize: isMobile ? '1rem' : '1.15rem',
+            lineHeight: 1.6,
             color: '#444',
           }}
         >
@@ -147,17 +157,17 @@ export default function TelaPrincipal() {
         data-aos="fade-up"
         style={{
           maxWidth: 900,
-          margin: '2.5rem auto 0 auto',
+          margin: isMobile ? '1.2rem auto 0 auto' : '2.5rem auto 0 auto',
           background: '#fff',
-          borderRadius: 18,
+          borderRadius: isMobile ? 10 : 18,
           boxShadow: '0 4px 24px #cb9a2822',
-          padding: '2.5rem 2rem'
+          padding: isMobile ? '1.2rem 0.7rem' : '2.5rem 2rem'
         }}
       >
         <h2 style={{
           color: '#cb9a28',
           fontWeight: 700,
-          fontSize: '2rem',
+          fontSize: isMobile ? '1.2rem' : '2rem',
           marginBottom: 8,
           textAlign: 'center'
         }}>Nossos Projetos</h2>
@@ -168,7 +178,13 @@ export default function TelaPrincipal() {
           borderRadius: 2,
           margin: '0 auto 24px auto'
         }} />
-        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginTop: 24 }}>
+        <div style={{
+          display: 'flex',
+          gap: isMobile ? 12 : 24,
+          flexWrap: 'wrap',
+          marginTop: 24,
+          flexDirection: isMobile ? 'column' : 'row'
+        }}>
           <Link
             to="/projeto1"
             style={cardStyle}
@@ -183,8 +199,8 @@ export default function TelaPrincipal() {
             }}
           >
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Projeto 1" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700 }}>Residencial Jardim</h3>
-            <p style={{ color: '#555' }}>Condomínio de casas modernas com área de lazer completa.</p>
+            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Residencial Jardim</h3>
+            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Condomínio de casas modernas com área de lazer completa.</p>
           </Link>
           <Link
             to="/projeto2"
@@ -200,8 +216,8 @@ export default function TelaPrincipal() {
             }}
           >
             <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Projeto 2" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700 }}>Edifício Central</h3>
-            <p style={{ color: '#555' }}>Prédio comercial no centro da cidade, com arquitetura inovadora.</p>
+            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Edifício Central</h3>
+            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Prédio comercial no centro da cidade, com arquitetura inovadora.</p>
           </Link>
           <Link
             to="/projeto3"
@@ -217,8 +233,8 @@ export default function TelaPrincipal() {
             }}
           >
             <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Projeto 3" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700 }}>Praça das Árvores</h3>
-            <p style={{ color: '#555' }}>Espaço público revitalizado para lazer e convivência.</p>
+            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Praça das Árvores</h3>
+            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Espaço público revitalizado para lazer e convivência.</p>
           </Link>
         </div>
       </section>
@@ -230,11 +246,11 @@ export default function TelaPrincipal() {
         data-aos-once="false"
         style={{
           maxWidth: 900,
-          margin: '2.5rem auto',
+          margin: isMobile ? '1.2rem auto' : '2.5rem auto',
           background: '#fffbe6',
-          borderRadius: 18,
+          borderRadius: isMobile ? 10 : 18,
           boxShadow: '0 4px 24px #cb9a2822',
-          padding: '2.5rem 2rem',
+          padding: isMobile ? '1.2rem 0.7rem' : '2.5rem 2rem',
           textAlign: 'center'
         }}
       >
@@ -243,7 +259,7 @@ export default function TelaPrincipal() {
             color: '#cb9a28',
             marginBottom: 16,
             fontWeight: 700,
-            fontSize: '2rem'
+            fontSize: isMobile ? '1.2rem' : '2rem'
           }}
           data-aos="fade-down"
         >
@@ -259,7 +275,7 @@ export default function TelaPrincipal() {
           }}
         />
         <p
-          style={{ marginBottom: 32, fontSize: '1.1rem', color: '#444' }}
+          style={{ marginBottom: 32, fontSize: isMobile ? '1rem' : '1.1rem', color: '#444' }}
           data-aos="fade-up"
         >
           Entre em contato conosco e faça já seu orçamento sem compromisso!
@@ -274,8 +290,8 @@ export default function TelaPrincipal() {
             background: 'linear-gradient(90deg, #25d366 60%, #128c7e 100%)',
             color: '#fff',
             fontWeight: 700,
-            fontSize: '1.15rem',
-            padding: '1rem 2.5rem',
+            fontSize: isMobile ? '1rem' : '1.15rem',
+            padding: isMobile ? '0.8rem 1.5rem' : '1rem 2.5rem',
             borderRadius: 30,
             textDecoration: 'none',
             boxShadow: '0 2px 8px #25d36655',
@@ -301,12 +317,12 @@ export default function TelaPrincipal() {
           background: 'linear-gradient(90deg, #cb9a28 60%, #ffe082 100%)',
           color: '#fff',
           textAlign: 'center',
-          padding: '1.2rem 0',
+          padding: isMobile ? '0.8rem 0' : '1.2rem 0',
           marginTop: 32,
-          borderTopLeftRadius: 40,
-          borderTopRightRadius: 40,
+          borderTopLeftRadius: isMobile ? 20 : 40,
+          borderTopRightRadius: isMobile ? 20 : 40,
           fontWeight: 500,
-          fontSize: '1rem',
+          fontSize: isMobile ? '0.95rem' : '1rem',
           letterSpacing: 1,
           boxShadow: '0 -2px 12px #cb9a2822'
         }}
