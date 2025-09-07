@@ -26,15 +26,15 @@ export default function TelaPrincipal() {
   const cardStyle = {
     flex: 1,
     minWidth: isMobile ? '100%' : 250,
-    background: '#fffbe6',
-    borderRadius: 12,
-    padding: isMobile ? 12 : 20,
-    boxShadow: '0 2px 8px #cb9a2822',
+    background: isMobile ? '#fff' : '#fffbe6',
+    borderRadius: isMobile ? 8 : 12,
+    padding: isMobile ? 6 : 20,
+    boxShadow: isMobile ? '0 1px 4px #cb9a2811' : '0 2px 8px #cb9a2822',
     transition: 'transform 0.25s, box-shadow 0.25s',
     cursor: 'pointer',
     textDecoration: 'none',
     color: 'inherit',
-    marginBottom: 16,
+    marginBottom: isMobile ? 10 : 16,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -46,6 +46,7 @@ export default function TelaPrincipal() {
         fontFamily: 'Segoe UI, Arial, sans-serif',
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #fffbe6 0%, #f5f5f5 100%)',
+        overflowX: 'hidden'
       }}
     >
       {/* Header */}
@@ -97,7 +98,8 @@ export default function TelaPrincipal() {
       <section
         data-aos="fade-up"
         style={{
-          maxWidth: 900,
+          maxWidth: '98vw',
+          width: 900,
           margin: isMobile ? '1.2rem auto 0 auto' : '2.5rem auto 0 auto',
           background: '#fff',
           borderRadius: isMobile ? 10 : 18,
@@ -156,7 +158,8 @@ export default function TelaPrincipal() {
       <section
         data-aos="fade-up"
         style={{
-          maxWidth: 900,
+          maxWidth: '98vw',
+          width: 900,
           margin: isMobile ? '1.2rem auto 0 auto' : '2.5rem auto 0 auto',
           background: '#fff',
           borderRadius: isMobile ? 10 : 18,
@@ -190,51 +193,129 @@ export default function TelaPrincipal() {
             style={cardStyle}
             data-aos="fade-right"
             onMouseOver={e => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.boxShadow = '0 4px 16px #cb9a2844';
+              e.currentTarget.style.transform = 'scale(1.03)';
+              e.currentTarget.style.boxShadow = '0 4px 12px #cb9a2844';
             }}
             onMouseOut={e => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 2px 8px #cb9a2822';
+              e.currentTarget.style.boxShadow = isMobile ? '0 1px 4px #cb9a2811' : '0 2px 8px #cb9a2822';
             }}
           >
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Projeto 1" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Residencial Jardim</h3>
-            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Condomínio de casas modernas com área de lazer completa.</p>
+            <img
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+              alt="Projeto 1"
+              style={{
+                width: '100%',
+                maxWidth: isMobile ? 260 : '100%',
+                height: isMobile ? 140 : 180,
+                objectFit: 'cover',
+                borderRadius: isMobile ? 6 : 8,
+                marginBottom: isMobile ? 8 : 12,
+                transition: 'transform 0.25s'
+              }}
+            />
+            <h3 style={{
+              color: '#cb9a28',
+              fontWeight: 700,
+              fontSize: isMobile ? '1rem' : '1.2rem',
+              margin: isMobile ? '0.5rem 0 0.2rem 0' : '0.7rem 0 0.3rem 0'
+            }}>
+              Residencial Jardim
+            </h3>
+            <p style={{
+              color: '#555',
+              fontSize: isMobile ? '0.95rem' : '1rem',
+              textAlign: 'center',
+              margin: 0
+            }}>
+              Condomínio de casas modernas com área de lazer completa.
+            </p>
           </Link>
           <Link
             to="/projeto2"
             style={cardStyle}
             data-aos="fade-up"
             onMouseOver={e => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.boxShadow = '0 4px 16px #cb9a2844';
+              e.currentTarget.style.transform = 'scale(1.03)';
+              e.currentTarget.style.boxShadow = '0 4px 12px #cb9a2844';
             }}
             onMouseOut={e => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 2px 8px #cb9a2822';
+              e.currentTarget.style.boxShadow = isMobile ? '0 1px 4px #cb9a2811' : '0 2px 8px #cb9a2822';
             }}
           >
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Projeto 2" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Edifício Central</h3>
-            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Prédio comercial no centro da cidade, com arquitetura inovadora.</p>
+            <img
+              src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+              alt="Projeto 2"
+              style={{
+                width: '100%',
+                maxWidth: isMobile ? 260 : '100%',
+                height: isMobile ? 140 : 180,
+                objectFit: 'cover',
+                borderRadius: isMobile ? 6 : 8,
+                marginBottom: isMobile ? 8 : 12,
+                transition: 'transform 0.25s'
+              }}
+            />
+            <h3 style={{
+              color: '#cb9a28',
+              fontWeight: 700,
+              fontSize: isMobile ? '1rem' : '1.2rem',
+              margin: isMobile ? '0.5rem 0 0.2rem 0' : '0.7rem 0 0.3rem 0'
+            }}>
+              Edifício Central
+            </h3>
+            <p style={{
+              color: '#555',
+              fontSize: isMobile ? '0.95rem' : '1rem',
+              textAlign: 'center',
+              margin: 0
+            }}>
+              Prédio comercial no centro da cidade, com arquitetura inovadora.
+            </p>
           </Link>
           <Link
             to="/projeto3"
             style={cardStyle}
             data-aos="fade-left"
             onMouseOver={e => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.boxShadow = '0 4px 16px #cb9a2844';
+              e.currentTarget.style.transform = 'scale(1.03)';
+              e.currentTarget.style.boxShadow = '0 4px 12px #cb9a2844';
             }}
             onMouseOut={e => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 2px 8px #cb9a2822';
+              e.currentTarget.style.boxShadow = isMobile ? '0 1px 4px #cb9a2811' : '0 2px 8px #cb9a2822';
             }}
           >
-            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Projeto 3" style={{ width: '100%', borderRadius: 8, marginBottom: 12, transition: 'transform 0.25s' }} />
-            <h3 style={{ color: '#cb9a28', fontWeight: 700, fontSize: isMobile ? '1rem' : '1.2rem' }}>Praça das Árvores</h3>
-            <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '1rem' }}>Espaço público revitalizado para lazer e convivência.</p>
+            <img
+              src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80"
+              alt="Projeto 3"
+              style={{
+                width: '100%',
+                maxWidth: isMobile ? 260 : '100%',
+                height: isMobile ? 140 : 180,
+                objectFit: 'cover',
+                borderRadius: isMobile ? 6 : 8,
+                marginBottom: isMobile ? 8 : 12,
+                transition: 'transform 0.25s'
+              }}
+            />
+            <h3 style={{
+              color: '#cb9a28',
+              fontWeight: 700,
+              fontSize: isMobile ? '1rem' : '1.2rem',
+              margin: isMobile ? '0.5rem 0 0.2rem 0' : '0.7rem 0 0.3rem 0'
+            }}>
+              Praça das Árvores
+            </h3>
+            <p style={{
+              color: '#555',
+              fontSize: isMobile ? '0.95rem' : '1rem',
+              textAlign: 'center',
+              margin: 0
+            }}>
+              Espaço público revitalizado para lazer e convivência.
+            </p>
           </Link>
         </div>
       </section>
@@ -245,7 +326,8 @@ export default function TelaPrincipal() {
         data-aos-duration="2000"
         data-aos-once="false"
         style={{
-          maxWidth: 900,
+          maxWidth: '98vw',
+          width: 900,
           margin: isMobile ? '1.2rem auto' : '2.5rem auto',
           background: '#fffbe6',
           borderRadius: isMobile ? 10 : 18,
